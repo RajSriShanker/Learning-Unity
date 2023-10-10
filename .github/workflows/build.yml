@@ -1,0 +1,30 @@
+name: Build and Deploy WebGL
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Unity
+        uses: game-ci/setup-unity@v2
+        with:
+          unityVersion: 2020.3
+
+      - name: Build WebGL
+        run: |
+          unitybatchmode -quit -nographics -buildTarget WebGL -projectPath "C:\Users\User\Documents\Unity Projects\LearningUnity_2023" -executeMethod BuildScript.BuildWebGL
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /path/to/your/unity/project/Builds/WebGL
+
