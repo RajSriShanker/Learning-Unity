@@ -16,7 +16,7 @@ jobs:
       - name: Set up Unity
         uses: game-ci/setup-unity@v2
         with:
-          unityVersion: 2020.3
+          unityVersion: 2022.3
 
       - name: Build WebGL
         run: |
