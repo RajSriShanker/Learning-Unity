@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Unity
-        uses: webbertakken/unity-actions/setup-unity@v1
+        uses: game-ci/unity-actions/setup-unity
         with:
           unityVersion: 2022.3.10f1
 
