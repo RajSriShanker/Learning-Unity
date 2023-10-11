@@ -6,10 +6,15 @@ public class PongBallController : MonoBehaviour
 {
     private Rigidbody2D pongBallRB;
 
+    [SerializeField] private float ballLaunchDelay = 1f;
     [SerializeField] private float moveSpeed = 10f;
 
     public float playerScore = 0f;
     public float enemyScore = 0f;
+
+    [SerializeField] private AudioSource hitSoundEffect;
+    [SerializeField] private AudioSource failSoundEffect;
+    [SerializeField] private AudioSource scoreSoundEffect;
 
     private void Awake()
     {
@@ -40,16 +45,26 @@ public class PongBallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player Boundary"))
         {
             enemyScore++;
+            failSoundEffect.Play();
             transform.position = new Vector2(0, 0);
             pongBallRB.velocity = new Vector2(0, 0);
-            Launch();
+            Invoke("Launch", ballLaunchDelay);
         }
         else if (collision.gameObject.CompareTag("Enemy Boundary"))
         {
             playerScore++;
+            scoreSoundEffect.Play();
             transform.position = new Vector2(0, 0);
             pongBallRB.velocity = new Vector2(0, 0);
-            Launch();
+            Invoke("Launch", ballLaunchDelay);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Paddle"))
+        {
+            hitSoundEffect.Play();
         }
     }
 }

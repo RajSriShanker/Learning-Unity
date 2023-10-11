@@ -34,16 +34,16 @@ public class EnemyPaddleController : MonoBehaviour
 
     private void EnemyPaddleMovement()
     { 
-        //Move on the Y axis based on the ball's position
         if (ball != null)
         {
             if (ball.transform.position.y > transform.position.y)
             {
-                enemyPaddleRB.velocity = new Vector2(0, 1 * moveSpeed);
+                //Move smoothly towards the ball by using Lerp
+                enemyPaddleRB.velocity = new Vector2(0, Mathf.Lerp(enemyPaddleRB.velocity.y, 1 * moveSpeed, 0.2f));
             }
             else if (ball.transform.position.y < transform.position.y)
             {
-                enemyPaddleRB.velocity = new Vector2(0, -1 * moveSpeed);
+                enemyPaddleRB.velocity = new Vector2(0, Mathf.Lerp(enemyPaddleRB.velocity.y, -1 * moveSpeed, 0.2f));
             }
             else
             {

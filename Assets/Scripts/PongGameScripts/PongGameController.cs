@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PongGameController : MonoBehaviour
 {
+    public static PongGameController instance;
 
     // Start is called before the first frame update
     void Start()
